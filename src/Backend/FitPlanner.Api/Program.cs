@@ -1,5 +1,9 @@
 using FitPlanner.Api.Filters;
 using FitPlanner.Api.Middleware;
+using FitPlanner.Application;
+using FitPlanner.Infrastructure;
+using FitPlanner.Infrastructure.Extensions;
+using FitPlanner.Infrastructure.Migrations;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc.Filters;
 
@@ -13,6 +17,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
+
+builder.Services.AddApplication(builder.Configuration);
+builder.Services.AddInfrastructure(builder.Configuration);  
 
 var app = builder.Build();
 
@@ -31,4 +38,15 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+MigrateDatabase();
+
 app.Run();
+
+void MigrateDatabase()
+{
+    var connectionString = builder.Configuration.ConnectionString();
+
+    var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
+    
+    DatabaseMigration.Migrate(connectionString, serviceScope.ServiceProvider);
+}

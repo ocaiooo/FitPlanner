@@ -11,10 +11,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\..\Shared\FitPlanner.Communication\FitPlanner.Communication.csproj" />
       <ProjectReference Include="..\..\Shared\FitPlanner.Exceptions\FitPlanner.Exceptions.csproj" />
       <ProjectReference Include="..\FitPlanner.Application\FitPlanner.Application.csproj" />
