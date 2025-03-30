@@ -2,6 +2,7 @@
 using FitPlanner.Application.Services.Cryptography;
 using FitPlanner.Communication.Requests;
 using FitPlanner.Communication.Responses;
+using FitPlanner.Domain.Repositories.User;
 using FitPlanner.Domain.Respositories;
 using FitPlanner.Domain.Respositories.User;
 using FitPlanner.Exceptions;

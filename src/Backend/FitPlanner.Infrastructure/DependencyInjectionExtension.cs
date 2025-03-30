@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using FitPlanner.Domain.Repositories.User;
 using FitPlanner.Domain.Respositories;
 using FitPlanner.Domain.Respositories.User;
 using FitPlanner.Infrastructure.DataAccess;

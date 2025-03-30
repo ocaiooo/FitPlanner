@@ -1,4 +1,5 @@
 ﻿using FitPlanner.Domain.Entities;
+using FitPlanner.Domain.Repositories.User;
 using FitPlanner.Domain.Respositories.User;
 
 namespace FitPlanner.Infrastructure.DataAccess.Repositories;

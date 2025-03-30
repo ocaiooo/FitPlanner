@@ -1,4 +1,4 @@
-﻿namespace FitPlanner.Domain.Respositories.User;
+﻿namespace FitPlanner.Domain.Repositories.User;
 
 public interface IUserWriteOnlyRepository
 {
