@@ -20,15 +20,26 @@ public class RegisterUserUseCaseTest
         Assert.NotNull(result);
         Assert.Equal(request.Name, result.Name);
     }
+
+    [Fact]
+    public async Task Error_Email_Already_Registered()
+    {
+        var request = RequestRegisterUserJsonBuilder.Build();
+        
+        var useCase = CreateUseCase(request.Email);
+    }
     
-    private RegisterUserUseCase CreateUseCase()
+    private RegisterUserUseCase CreateUseCase(string? email = null)
     {
         var mapper = MapperBuilder.Build();
         var passwordEncripter = PasswordEncripterBuilder.Build();
         var unitOfWork = UnitOfWorkBuilder.Build();
         var userWriteOnlyRepository = UserWriteOnlyRepositoryBuilder.Build();
-        var userReadOnlyRepository = new UserReadOnlyRepositoryBuilder().Build();
+        var userReadOnlyRepositoryBuilder = new UserReadOnlyRepositoryBuilder();
+
+        if (string.IsNullOrEmpty(email) == false)
+            userReadOnlyRepositoryBuilder.ExistActiveUseWithEmail(email);
         
-        return new RegisterUserUseCase(userReadOnlyRepository,userWriteOnlyRepository, unitOfWork, mapper, passwordEncripter);
+        return new RegisterUserUseCase(userReadOnlyRepositoryBuilder.Build(),userWriteOnlyRepository, unitOfWork, mapper, passwordEncripter);
     }
 }
