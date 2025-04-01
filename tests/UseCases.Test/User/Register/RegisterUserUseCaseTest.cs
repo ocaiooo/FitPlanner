@@ -38,6 +38,22 @@ public class RegisterUserUseCaseTest
         Assert.Equal(ResourceMessagesException.EMAIL_ALREADY_REGISTERED, exception.ErrorMessages.First());
     }
     
+    [Fact]
+    public async Task Error_Name_Empty()
+    {
+        var request = RequestRegisterUserJsonBuilder.Build();
+        request.Name = string.Empty;
+        
+        var useCase = CreateUseCase();
+
+        Func<Task> act = async () => await useCase.Execute(request);
+
+        var exception =  await Assert.ThrowsAsync<ErrorOnValidationException>(() => act());
+        
+        Assert.Single(exception.ErrorMessages);
+        Assert.Equal(ResourceMessagesException.NAME_EMPTY, exception.ErrorMessages.First());
+    }
+    
     private RegisterUserUseCase CreateUseCase(string? email = null)
     {
         var mapper = MapperBuilder.Build();
