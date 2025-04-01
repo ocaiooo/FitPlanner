@@ -3,6 +3,8 @@ using CommonTestUtilities.Mapper;
 using CommonTestUtilities.Repositories;
 using CommonTestUtilities.Requests;
 using FitPlanner.Application.UseCases.User.Register;
+using FitPlanner.Exceptions;
+using FitPlanner.Exceptions.ExceptionsBase;
 
 namespace UseCases.Test.User.Register;
 
@@ -27,6 +29,13 @@ public class RegisterUserUseCaseTest
         var request = RequestRegisterUserJsonBuilder.Build();
         
         var useCase = CreateUseCase(request.Email);
+
+        Func<Task> act = async () => await useCase.Execute(request);
+
+        var exception =  await Assert.ThrowsAsync<ErrorOnValidationException>(() => act());
+        
+        Assert.Single(exception.ErrorMessages);
+        Assert.Equal(ResourceMessagesException.EMAIL_ALREADY_REGISTERED, exception.ErrorMessages.First());
     }
     
     private RegisterUserUseCase CreateUseCase(string? email = null)
