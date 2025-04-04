@@ -25,7 +25,7 @@ public static class DependencyInjectionExtension
     {
         services.AddDbContext<FitPlannerDbContext>(dbContextOptions =>
         {
-            dbContextOptions.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+            dbContextOptions.UseSqlServer(configuration.GetConnectionString("Connection"));
         });
     }
     
@@ -45,7 +45,7 @@ public static class DependencyInjectionExtension
             options
                 .AddSqlServer()
                 .WithGlobalConnectionString(connectionString)
-                .ScanIn(Assembly.Load("MyRecipeBook.Infrastructure")).For.All();
+                .ScanIn(Assembly.Load("FitPlanner.Infrastructure")).For.All();
         });
     } 
 }
