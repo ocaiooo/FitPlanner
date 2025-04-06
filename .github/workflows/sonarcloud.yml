@@ -37,6 +37,12 @@ jobs:
         run: |
           New-Item -Path .\.sonar\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
+      - name: Install Coverlet
+        shell: powershell
+        run: |
+          dotnet add tests/Validators.Test/Validators.Test.csproj package coverlet.msbuild
+          dotnet add tests/UseCases.Test/UseCases.Test.csproj package coverlet.msbuild
+          dotnet add tests/WebApi.Test/WebApi.Test.csproj package coverlet.msbuild
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -44,4 +50,5 @@ jobs:
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"ocaiooo_FitPlanner" /o:"ocaiooo" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build --configuration 'release'
+          dotnet test --no-build --configuration 'release' /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
