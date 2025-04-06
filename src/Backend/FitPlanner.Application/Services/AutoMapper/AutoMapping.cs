@@ -18,6 +18,6 @@ public class AutoMapping : Profile
 
     private void DomainToResponse()
     {
-        
+        throw new NotImplementedException();
     }
 }

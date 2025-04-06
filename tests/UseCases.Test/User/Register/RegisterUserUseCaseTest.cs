@@ -54,7 +54,7 @@ public class RegisterUserUseCaseTest
         Assert.Equal(ResourceMessagesException.NAME_EMPTY, exception.ErrorMessages.First());
     }
     
-    private RegisterUserUseCase CreateUseCase(string? email = null)
+    private static RegisterUserUseCase CreateUseCase(string? email = null)
     {
         var mapper = MapperBuilder.Build();
         var passwordEncripter = PasswordEncripterBuilder.Build();
