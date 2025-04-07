@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace FitPlanner.Infrastructure.Migrations;
 
-public class DatabaseMigration
+public abstract class DatabaseMigration
 {
     public static void Migrate(string connectionString, IServiceProvider serviceProvider)
     {
@@ -28,7 +28,7 @@ public class DatabaseMigration
         
         var records = dbConnection.Query("SELECT database_id FROM sys.databases WHERE name = @name", parameters);
         
-        if (records.Any() == false)
+        if (!records.Any())
             dbConnection.Execute($"CREATE DATABASE {dabaseName}");
     }
 

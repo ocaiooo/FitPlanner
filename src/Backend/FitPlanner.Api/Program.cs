@@ -4,8 +4,6 @@ using FitPlanner.Application;
 using FitPlanner.Infrastructure;
 using FitPlanner.Infrastructure.Extensions;
 using FitPlanner.Infrastructure.Migrations;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Mvc.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,6 +39,7 @@ app.MapControllers();
 MigrateDatabase();
 
 app.Run();
+return;
 
 void MigrateDatabase()
 {
@@ -54,4 +53,7 @@ void MigrateDatabase()
     DatabaseMigration.Migrate(connectionString, serviceScope.ServiceProvider);
 }
 
-public partial class Program;
+public abstract partial class Program
+{
+    protected Program() { }
+}
