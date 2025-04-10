@@ -36,4 +36,7 @@
     <data name="PASSWORD_TOO_SHORT" xml:space="preserve">
         <value>A palavra-passe deve ter no mínimo 6 caracteres.</value>
     </data>
+    <data name="EMAIL_OR_PASSWORD_INVALID" xml:space="preserve">
+        <value>E-mail e/ou palavra-passe inválidos.</value>
+    </data>
 </root>
