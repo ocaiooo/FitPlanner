@@ -87,6 +87,15 @@ namespace FitPlanner.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email e/ou senha inválidos..
+        /// </summary>
+        internal static string EMAIL_OR_PASSWORD_INVALID {
+            get {
+                return ResourceManager.GetString("EMAIL_OR_PASSWORD_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O nome não pode estar vazio..
         /// </summary>
         internal static string NAME_EMPTY {

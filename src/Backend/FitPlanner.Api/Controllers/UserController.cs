@@ -4,9 +4,8 @@ using FitPlanner.Communication.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FitPlanner.Api.Controllers;
-[Route("[controller]")]
-[ApiController]
-public class UserController : ControllerBase
+
+public class UserController : FitPlannerBaseController
 {
     [HttpPost]
     [ProducesResponseType(typeof(ResponseRegisteredUserJson), StatusCodes.Status201Created)]
