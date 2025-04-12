@@ -1,4 +1,5 @@
-﻿using FitPlanner.Domain.Respositories.User;
+﻿using FitPlanner.Domain.Entities;
+using FitPlanner.Domain.Respositories.User;
 using Moq;
 
 namespace CommonTestUtilities.Repositories;
@@ -14,5 +15,10 @@ public class UserReadOnlyRepositoryBuilder
         _repository.Setup(repository => repository.ExistActiveUserWithEmail(email)).ReturnsAsync(true);
     }
         
+    
+    public void GetByEmailAndPassword(User user)
+    {
+        _repository.Setup(repository => repository.GetByEmailAndPassword(user.Email, user.Password)).ReturnsAsync(user);
+    }
     public IUserReadOnlyRepository Build() => _repository.Object;
 }
