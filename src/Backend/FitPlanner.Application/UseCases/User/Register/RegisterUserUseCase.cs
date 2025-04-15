@@ -5,6 +5,7 @@ using FitPlanner.Communication.Responses;
 using FitPlanner.Domain.Repositories.User;
 using FitPlanner.Domain.Respositories;
 using FitPlanner.Domain.Respositories.User;
+using FitPlanner.Domain.Security.Tokens;
 using FitPlanner.Exceptions;
 using FitPlanner.Exceptions.ExceptionsBase;
 
@@ -17,18 +18,20 @@ public class RegisterUserUseCase : IRegisterUserUseCase
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
     private readonly PasswordEncripter _passwordEncripter;
+    private readonly IAccessTokenGenerator _accessTokenGenerator;
 
     public RegisterUserUseCase(IUserReadOnlyRepository readOnlyRepository,
         IUserWriteOnlyRepository writeOnlyRepository,
         IUnitOfWork unitOfWork,
         IMapper mapper,
-        PasswordEncripter passwordEncripter)
+        PasswordEncripter passwordEncripter, IAccessTokenGenerator accessTokenGenerator)
     {
         _readOnlyRepository = readOnlyRepository;
         _writeOnlyRepository = writeOnlyRepository;
         _unitOfWork = unitOfWork;
         _mapper = mapper;
         _passwordEncripter = passwordEncripter;
+        _accessTokenGenerator = accessTokenGenerator;
     }
 
     public async Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request)
@@ -38,11 +41,19 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         var user = _mapper.Map<Domain.Entities.User>(request);
         
         user.Password = _passwordEncripter.Encrypt(request.Password);
+        user.UserIdentifier = Guid.NewGuid();
         
         await _writeOnlyRepository.Add(user);
         await _unitOfWork.Commit();
         
-        return new ResponseRegisteredUserJson { Name = request.Name };
+        return new ResponseRegisteredUserJson 
+        { 
+            Name = request.Name,
+            Tokens = new ResponseTokensJson
+            {
+                AccessToken = _accessTokenGenerator.Generate(user.UserIdentifier),
+            } 
+        };
     }
 
     private async Task Validate(RequestRegisterUserJson request)
