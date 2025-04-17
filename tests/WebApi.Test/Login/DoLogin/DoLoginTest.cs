@@ -40,9 +40,13 @@ public class DoLoginTest : FitPlannerClassFixture
         var responseData = await JsonDocument.ParseAsync(responseBody);
 
         var userName = responseData.RootElement.GetProperty("name").GetString();
+        var userToken = responseData.RootElement.GetProperty("tokens").GetProperty("AccessToken").GetString();
         Assert.NotNull(userName);
         Assert.NotEmpty(userName);
         Assert.Equal(_name, userName);
+        
+        Assert.NotNull(userToken);
+        Assert.NotEmpty(userToken);
     }
 
     [Theory]

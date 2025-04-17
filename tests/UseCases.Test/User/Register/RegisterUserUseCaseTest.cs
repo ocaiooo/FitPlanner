@@ -2,6 +2,7 @@
 using CommonTestUtilities.Mapper;
 using CommonTestUtilities.Repositories;
 using CommonTestUtilities.Requests;
+using CommonTestUtilities.Tokens;
 using FitPlanner.Application.UseCases.User.Register;
 using FitPlanner.Exceptions;
 using FitPlanner.Exceptions.ExceptionsBase;
@@ -20,6 +21,8 @@ public class RegisterUserUseCaseTest
         var result = await useCase.Execute(request);
         
         Assert.NotNull(result);
+        Assert.NotNull(result.Tokens);
+        Assert.NotNull(result.Tokens.AccessToken);
         Assert.Equal(request.Name, result.Name);
     }
 
@@ -61,10 +64,12 @@ public class RegisterUserUseCaseTest
         var unitOfWork = UnitOfWorkBuilder.Build();
         var userWriteOnlyRepository = UserWriteOnlyRepositoryBuilder.Build();
         var userReadOnlyRepositoryBuilder = new UserReadOnlyRepositoryBuilder();
+        var accessTokenGenerator = JwtTokenGeneratorBuilder.Build();
+
 
         if (string.IsNullOrEmpty(email) == false)
             userReadOnlyRepositoryBuilder.ExistActiveUseWithEmail(email);
         
-        return new RegisterUserUseCase(userReadOnlyRepositoryBuilder.Build(),userWriteOnlyRepository, unitOfWork, mapper, passwordEncripter);
+        return new RegisterUserUseCase(userReadOnlyRepositoryBuilder.Build(),userWriteOnlyRepository, unitOfWork, mapper, passwordEncripter, accessTokenGenerator);
     }
 }

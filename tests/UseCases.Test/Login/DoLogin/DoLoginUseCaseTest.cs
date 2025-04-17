@@ -2,6 +2,7 @@
 using CommonTestUtilities.Entities;
 using CommonTestUtilities.Repositories;
 using CommonTestUtilities.Requests;
+using CommonTestUtilities.Tokens;
 using FitPlanner.Application.UseCases.Login.DoLogin;
 using FitPlanner.Communication.Requests;
 using FitPlanner.Exceptions;
@@ -26,6 +27,8 @@ public class DoLoginUseCaseTest
         
         Assert.NotNull(result);
         Assert.NotNull(result.Name);
+        Assert.NotNull(result.Tokens);
+        Assert.NotNull(result.Tokens.AccessToken);
         Assert.Equal(user.Name, result.Name);
     }
 
@@ -47,10 +50,11 @@ public class DoLoginUseCaseTest
     {
         var passwordEncripter = PasswordEncripterBuilder.Build();
         var userReadOnlyRepositoryBuilder = new UserReadOnlyRepositoryBuilder();
+        var accessTokenGenerator = JwtTokenGeneratorBuilder.Build();
 
         if (user is not null)
             userReadOnlyRepositoryBuilder.GetByEmailAndPassword(user);
         
-        return new DoLoginUseCase(userReadOnlyRepositoryBuilder.Build(), passwordEncripter);
+        return new DoLoginUseCase(userReadOnlyRepositoryBuilder.Build(), passwordEncripter, accessTokenGenerator);
     }
 }
