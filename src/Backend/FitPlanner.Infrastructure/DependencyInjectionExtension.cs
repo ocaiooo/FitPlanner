@@ -7,6 +7,7 @@ using FitPlanner.Infrastructure.DataAccess;
 using FitPlanner.Infrastructure.DataAccess.Repositories;
 using FitPlanner.Infrastructure.Extensions;
 using FitPlanner.Infrastructure.Security.Tokens.Access.Generator;
+using FitPlanner.Infrastructure.Security.Tokens.Access.Validator;
 using FluentMigrator.Runner;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -62,5 +63,6 @@ public static class DependencyInjectionExtension
         var signingKey = configuration.GetValue<string>("Settings:Jwt:SigningKey");
         
         services.AddScoped<IAccessTokenGenerator>(_ => new JwtTokenGenerator(signingKey!, expirationTimeMinutes));
+        services.AddScoped<IAccessTokenValidator>(_ => new JwtTokenValidator(signingKey!));
     }
 }
