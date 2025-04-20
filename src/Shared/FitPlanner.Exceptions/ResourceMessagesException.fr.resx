@@ -39,4 +39,10 @@
     <data name="EMAIL_OR_PASSWORD_INVALID" xml:space="preserve">
         <value>E-mail et/ou mot de passe non valides.</value>
     </data>
+    <data name="NO_TOKEN" xml:space="preserve">
+        <value>Jeton d'authentification requis pour accéder à cette ressource.</value>
+    </data>
+    <data name="USER_WITHOUT_PERMISSION_ACCESS_RESOURCE" xml:space="preserve">
+        <value>L'utilisateur n'a pas l'autorisation d'accéder à cette ressource.</value>
+    </data>
 </root>

@@ -105,6 +105,15 @@ namespace FitPlanner.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Token de autenticação necessário para aceder a este recurso..
+        /// </summary>
+        internal static string NO_TOKEN {
+            get {
+                return ResourceManager.GetString("NO_TOKEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A palavra-passe deve ter no mínimo 6 caracteres..
         /// </summary>
         internal static string PASSWORD_TOO_SHORT {
@@ -119,6 +128,15 @@ namespace FitPlanner.Exceptions {
         internal static string UNKNOWN_ERROR {
             get {
                 return ResourceManager.GetString("UNKNOWN_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Utilizador não possui permissão para aceder a esse recurso..
+        /// </summary>
+        internal static string USER_WITHOUT_PERMISSION_ACCESS_RESOURCE {
+            get {
+                return ResourceManager.GetString("USER_WITHOUT_PERMISSION_ACCESS_RESOURCE", resourceCulture);
             }
         }
     }

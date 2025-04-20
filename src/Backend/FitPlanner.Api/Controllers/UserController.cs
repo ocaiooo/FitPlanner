@@ -1,10 +1,12 @@
-﻿using FitPlanner.Application.UseCases.User.Register;
+﻿using FitPlanner.Api.Attributes;
+using FitPlanner.Application.UseCases.User.Register;
 using FitPlanner.Communication.Requests;
 using FitPlanner.Communication.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FitPlanner.Api.Controllers;
 
+[AuthenticatedUser]
 public class UserController : FitPlannerBaseController
 {
     [HttpPost]
