@@ -105,6 +105,15 @@ namespace FitPlanner.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Jeton d&apos;authentification requis pour accéder à cette ressource..
+        /// </summary>
+        internal static string NO_TOKEN {
+            get {
+                return ResourceManager.GetString("NO_TOKEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Le mot de passe doit contenir au moins 6 caractères..
         /// </summary>
         internal static string PASSWORD_TOO_SHORT {
@@ -119,6 +128,15 @@ namespace FitPlanner.Exceptions {
         internal static string UNKNOWN_ERROR {
             get {
                 return ResourceManager.GetString("UNKNOWN_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to L&apos;utilisateur n&apos;a pas l&apos;autorisation d&apos;accéder à cette ressource..
+        /// </summary>
+        internal static string USER_WITHOUT_PERMISSION_ACCESS_RESOURCE {
+            get {
+                return ResourceManager.GetString("USER_WITHOUT_PERMISSION_ACCESS_RESOURCE", resourceCulture);
             }
         }
     }
