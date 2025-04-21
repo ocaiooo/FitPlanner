@@ -3,11 +3,13 @@ using FitPlanner.Domain.Repositories.User;
 using FitPlanner.Domain.Respositories;
 using FitPlanner.Domain.Respositories.User;
 using FitPlanner.Domain.Security.Tokens;
+using FitPlanner.Domain.Services.LoggedUser;
 using FitPlanner.Infrastructure.DataAccess;
 using FitPlanner.Infrastructure.DataAccess.Repositories;
 using FitPlanner.Infrastructure.Extensions;
 using FitPlanner.Infrastructure.Security.Tokens.Access.Generator;
 using FitPlanner.Infrastructure.Security.Tokens.Access.Validator;
+using FitPlanner.Infrastructure.Services.LoggedUser;
 using FluentMigrator.Runner;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +22,7 @@ public static class DependencyInjectionExtension
     public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         AddRepositories(services);
+        AddLoggedUser(services);
         AddTokens(services, configuration);
         
         if (configuration.IsUnitTestEnviroment())
@@ -43,6 +46,8 @@ public static class DependencyInjectionExtension
         services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
         services.AddScoped<IUserReadOnlyRepository, UserRepository>();
     }
+    
+    private static void AddLoggedUser(IServiceCollection services) => services.AddScoped<ILoggedUser, LoggedUser>();
 
     private static void AddFluentMigrator(IServiceCollection services, IConfiguration configuration)
     {
