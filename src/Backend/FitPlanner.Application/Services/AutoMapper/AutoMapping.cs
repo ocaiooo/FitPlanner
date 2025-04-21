@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FitPlanner.Communication.Requests;
+using FitPlanner.Communication.Responses;
 
 namespace FitPlanner.Application.Services.AutoMapper;
 
@@ -8,6 +9,7 @@ public class AutoMapping : Profile
     public AutoMapping()
     {
         RequestToDomain();
+        DomainToResponse();
     }
 
     private void RequestToDomain()
@@ -18,6 +20,6 @@ public class AutoMapping : Profile
 
     private void DomainToResponse()
     {
-        throw new NotImplementedException();
+        CreateMap<Domain.Entities.User, ResponseUserProfileJson>();
     }
 }

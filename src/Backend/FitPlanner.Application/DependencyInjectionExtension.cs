@@ -1,6 +1,7 @@
 ﻿using FitPlanner.Application.Services.AutoMapper;
 using FitPlanner.Application.Services.Cryptography;
 using FitPlanner.Application.UseCases.Login.DoLogin;
+using FitPlanner.Application.UseCases.User.Profile;
 using FitPlanner.Application.UseCases.User.Register;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +29,7 @@ public static class DependencyInjectionExtension
     {
         services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
         services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
+        services.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>();
     }
 
     private static void AddPasswordEncripter(IServiceCollection services, IConfiguration configuration)
