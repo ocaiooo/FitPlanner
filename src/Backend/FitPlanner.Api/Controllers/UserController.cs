@@ -1,4 +1,5 @@
 ﻿using FitPlanner.Api.Attributes;
+using FitPlanner.Application.UseCases.User.Profile;
 using FitPlanner.Application.UseCases.User.Register;
 using FitPlanner.Communication.Requests;
 using FitPlanner.Communication.Responses;
@@ -6,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FitPlanner.Api.Controllers;
 
-[AuthenticatedUser]
 public class UserController : FitPlannerBaseController
 {
     [HttpPost]
@@ -18,5 +18,15 @@ public class UserController : FitPlannerBaseController
         var result = await useCase.Execute(request);
         
         return Created(string.Empty, result);
+    }
+
+    [HttpGet]
+    [ProducesResponseType(typeof(ResponseUserProfileJson), StatusCodes.Status200OK)]
+    [AuthenticatedUser]
+    public async Task<IActionResult> GetUserProfile([FromServices] IGetUserProfileUseCase useCase)
+    {
+        var result = await useCase.Execute();
+        
+        return Ok(result);
     }
 }
