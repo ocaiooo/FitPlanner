@@ -1,7 +1,9 @@
 using FitPlanner.Api.Converters;
 using FitPlanner.Api.Filters;
 using FitPlanner.Api.Middleware;
+using FitPlanner.Api.Token;
 using FitPlanner.Application;
+using FitPlanner.Domain.Security.Tokens;
 using FitPlanner.Infrastructure;
 using FitPlanner.Infrastructure.Extensions;
 using FitPlanner.Infrastructure.Migrations;
@@ -51,9 +53,12 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 
 builder.Services.AddApplication(builder.Configuration);
-builder.Services.AddInfrastructure(builder.Configuration);  
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
+
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
