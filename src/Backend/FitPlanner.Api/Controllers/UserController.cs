@@ -1,6 +1,7 @@
 ﻿using FitPlanner.Api.Attributes;
 using FitPlanner.Application.UseCases.User.Profile;
 using FitPlanner.Application.UseCases.User.Register;
+using FitPlanner.Application.UseCases.User.Update;
 using FitPlanner.Communication.Requests;
 using FitPlanner.Communication.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,7 @@ public class UserController : FitPlannerBaseController
 {
     [HttpPost]
     [ProducesResponseType(typeof(ResponseRegisteredUserJson), StatusCodes.Status201Created)]
-    public async Task<IActionResult> Execute(
+    public async Task<IActionResult> Register(
         [FromServices] IRegisterUserUseCase useCase,
         [FromBody] RequestRegisterUserJson request)
     {
@@ -28,5 +29,18 @@ public class UserController : FitPlannerBaseController
         var result = await useCase.Execute();
         
         return Ok(result);
+    }
+
+    [HttpPut]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+    [AuthenticatedUser]
+    public async Task<IActionResult> Update(
+        [FromServices] IUpdateUserUseCase useCase,
+        [FromBody] RequestUpdateUserJson request)
+    {
+        await useCase.Execute(request);
+        
+        return NoContent();
     }
 }
