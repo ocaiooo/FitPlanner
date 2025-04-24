@@ -68,7 +68,7 @@ public class RegisterUserUseCaseTest
 
 
         if (string.IsNullOrEmpty(email) == false)
-            userReadOnlyRepositoryBuilder.ExistActiveUseWithEmail(email);
+            userReadOnlyRepositoryBuilder.ExistActiveUserWithEmail(email);
         
         return new RegisterUserUseCase(userReadOnlyRepositoryBuilder.Build(),userWriteOnlyRepository, unitOfWork, mapper, passwordEncripter, accessTokenGenerator);
     }
