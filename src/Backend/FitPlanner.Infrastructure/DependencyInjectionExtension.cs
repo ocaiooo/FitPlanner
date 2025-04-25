@@ -2,11 +2,13 @@
 using FitPlanner.Domain.Repositories.User;
 using FitPlanner.Domain.Respositories;
 using FitPlanner.Domain.Respositories.User;
+using FitPlanner.Domain.Security.Cryptography;
 using FitPlanner.Domain.Security.Tokens;
 using FitPlanner.Domain.Services.LoggedUser;
 using FitPlanner.Infrastructure.DataAccess;
 using FitPlanner.Infrastructure.DataAccess.Repositories;
 using FitPlanner.Infrastructure.Extensions;
+using FitPlanner.Infrastructure.Security.Cryptography;
 using FitPlanner.Infrastructure.Security.Tokens.Access.Generator;
 using FitPlanner.Infrastructure.Security.Tokens.Access.Validator;
 using FitPlanner.Infrastructure.Services.LoggedUser;
@@ -21,6 +23,7 @@ public static class DependencyInjectionExtension
 {
     public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
+        AddPasswordEncripter(services, configuration);
         AddRepositories(services);
         AddLoggedUser(services);
         AddTokens(services, configuration);
@@ -70,5 +73,12 @@ public static class DependencyInjectionExtension
         
         services.AddScoped<IAccessTokenGenerator>(_ => new JwtTokenGenerator(signingKey!, expirationTimeMinutes));
         services.AddScoped<IAccessTokenValidator>(_ => new JwtTokenValidator(signingKey!));
+    }
+    
+    private static void AddPasswordEncripter(IServiceCollection services, IConfiguration configuration)
+    {
+        var additionalKey = configuration.GetValue<string>("Settings:Password:AdditionalKey");
+        
+        services.AddScoped<IPasswordEncripter>(option => new Sha512Encripter(additionalKey!));
     }
 }
