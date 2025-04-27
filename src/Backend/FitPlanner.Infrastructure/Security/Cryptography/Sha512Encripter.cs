@@ -31,4 +31,14 @@ public class Sha512Encripter : IPasswordEncripter
         
         return sb.ToString();
     }
+    
+    public bool IsValid(string password, string passwordHash)
+    {
+        var newPassword = $"{password}{_additionalKey}";
+        
+        var bytes = Encoding.UTF8.GetBytes(newPassword);
+        var hashBytes = SHA512.HashData(bytes);
+        
+        return StringBytes(hashBytes) == passwordHash;
+    }
 }
