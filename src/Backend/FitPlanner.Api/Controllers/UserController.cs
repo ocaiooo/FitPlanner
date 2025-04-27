@@ -1,4 +1,5 @@
 ﻿using FitPlanner.Api.Attributes;
+using FitPlanner.Application.UseCases.User.ChangePassword;
 using FitPlanner.Application.UseCases.User.Profile;
 using FitPlanner.Application.UseCases.User.Register;
 using FitPlanner.Application.UseCases.User.Update;

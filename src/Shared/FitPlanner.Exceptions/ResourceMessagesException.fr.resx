@@ -45,4 +45,10 @@
     <data name="USER_WITHOUT_PERMISSION_ACCESS_RESOURCE" xml:space="preserve">
         <value>L'utilisateur n'a pas l'autorisation d'accéder à cette ressource.</value>
     </data>
+    <data name="PASSWORD_DIFFERENT_CURRENT_PASSWORD" xml:space="preserve">
+        <value>Le mot de passe saisi est différent du mot de passe actuel.</value>
+    </data>
+    <data name="PASSWORD_EMPTY" xml:space="preserve">
+        <value>Le mot de passe ne peut pas être vide.</value>
+    </data>
 </root>

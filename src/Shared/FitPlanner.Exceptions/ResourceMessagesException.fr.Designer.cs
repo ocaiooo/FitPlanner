@@ -114,6 +114,24 @@ namespace FitPlanner.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Le mot de passe saisi est différent du mot de passe actuel..
+        /// </summary>
+        internal static string PASSWORD_DIFFERENT_CURRENT_PASSWORD {
+            get {
+                return ResourceManager.GetString("PASSWORD_DIFFERENT_CURRENT_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Le mot de passe ne peut pas être vide..
+        /// </summary>
+        internal static string PASSWORD_EMPTY {
+            get {
+                return ResourceManager.GetString("PASSWORD_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Le mot de passe doit contenir au moins 6 caractères..
         /// </summary>
         internal static string PASSWORD_TOO_SHORT {
