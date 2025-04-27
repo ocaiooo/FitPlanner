@@ -10,7 +10,7 @@ public class PasswordValidator<T> : PropertyValidator<T, string>
     {
         if (string.IsNullOrWhiteSpace(password))
         {
-            context.MessageFormatter.AppendArgument("ErrorMessage", ResourceMessagesException.PASSWORD_TOO_SHORT);
+            context.MessageFormatter.AppendArgument("ErrorMessage", ResourceMessagesException.PASSWORD_EMPTY);
 
             return false;
         }
