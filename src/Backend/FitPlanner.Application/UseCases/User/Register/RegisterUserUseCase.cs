@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using FitPlanner.Application.Services.Cryptography;
 using FitPlanner.Communication.Requests;
 using FitPlanner.Communication.Responses;
 using FitPlanner.Domain.Repositories.User;
 using FitPlanner.Domain.Respositories;
 using FitPlanner.Domain.Respositories.User;
+using FitPlanner.Domain.Security.Cryptography;
 using FitPlanner.Domain.Security.Tokens;
 using FitPlanner.Exceptions;
 using FitPlanner.Exceptions.ExceptionsBase;
@@ -17,14 +17,14 @@ public class RegisterUserUseCase : IRegisterUserUseCase
     private readonly IUserWriteOnlyRepository _writeOnlyRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
-    private readonly PasswordEncripter _passwordEncripter;
+    private readonly IPasswordEncripter _passwordEncripter;
     private readonly IAccessTokenGenerator _accessTokenGenerator;
 
     public RegisterUserUseCase(IUserReadOnlyRepository readOnlyRepository,
         IUserWriteOnlyRepository writeOnlyRepository,
         IUnitOfWork unitOfWork,
         IMapper mapper,
-        PasswordEncripter passwordEncripter, 
+        IPasswordEncripter passwordEncripter, 
         IAccessTokenGenerator accessTokenGenerator)
     {
         _readOnlyRepository = readOnlyRepository;

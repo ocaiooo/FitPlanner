@@ -1,5 +1,4 @@
 ﻿using FitPlanner.Application.Services.AutoMapper;
-using FitPlanner.Application.Services.Cryptography;
 using FitPlanner.Application.UseCases.Login.DoLogin;
 using FitPlanner.Application.UseCases.User.Profile;
 using FitPlanner.Application.UseCases.User.Register;
@@ -13,7 +12,6 @@ public static class DependencyInjectionExtension
 {
     public static void AddApplication(this IServiceCollection services, IConfiguration configuration)
     {
-        AddPasswordEncripter(services, configuration);
         AddAutoMapper(services);
         AddUseCases(services);
     }
@@ -34,10 +32,5 @@ public static class DependencyInjectionExtension
         services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
     }
 
-    private static void AddPasswordEncripter(IServiceCollection services, IConfiguration configuration)
-    {
-        var additionalKey = configuration.GetValue<string>("Settings:Password:AdditionalKey");
-        
-        services.AddScoped(option => new PasswordEncripter(additionalKey!));
-    }
+
 }
