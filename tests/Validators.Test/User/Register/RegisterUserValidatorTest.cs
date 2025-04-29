@@ -64,7 +64,6 @@ public class RegisterUserValidatorTest
     }
 
     [Theory]
-    [InlineData(0)]
     [InlineData(1)]
     [InlineData(2)]
     [InlineData(3)]
@@ -81,5 +80,20 @@ public class RegisterUserValidatorTest
         Assert.False(result.IsValid);
         Assert.Single(result.Errors);
         Assert.Equal(ResourceMessagesException.PASSWORD_TOO_SHORT, result.Errors[0].ErrorMessage);
+    }
+    
+    [Fact]
+    public void Error_Password_Empty()
+    {
+        var validator = new RegisterUserValidator();
+        
+        var request = RequestRegisterUserJsonBuilder.Build();
+        request.Password = string.Empty;
+        
+        var result = validator.Validate(request);
+        
+        Assert.False(result.IsValid);
+        Assert.Single(result.Errors);
+        Assert.Equal(ResourceMessagesException.PASSWORD_EMPTY, result.Errors[0].ErrorMessage);
     }
 }
