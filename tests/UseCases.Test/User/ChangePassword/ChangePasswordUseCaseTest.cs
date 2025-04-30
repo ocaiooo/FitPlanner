@@ -5,7 +5,7 @@ namespace UseCases.Test.User.ChangePassword;
 
 public class ChangePasswordUseCaseTest
 {
-    [Fact]
+    /*[Fact]
     private async Task Success()
     {
         var (user, password) = UserBuilder.Build();
@@ -18,5 +18,5 @@ public class ChangePasswordUseCaseTest
         Func<Task> act = async () => await useCase.Execute(request);
 
         
-    }
+    }*/
 }

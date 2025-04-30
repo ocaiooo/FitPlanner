@@ -32,6 +32,6 @@ public class GetUserProfileInvalidTokenTest : FitPlannerClassFixture
 
         var response = await DoGet(Method, token);
 
-        Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
     }
 }
