@@ -23,21 +23,22 @@ public class GetUserProfileTest : FitPlannerClassFixture
     public async Task Success()
     {
         var token = JwtTokenGeneratorBuilder.Build().Generate(_userIdentifier);
-        
         var response = await DoGet(Method, token: token);
         
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         
         await using var responseBody = await response.Content.ReadAsStreamAsync();
-        
         var responseData = await JsonDocument.ParseAsync(responseBody);
         
-        var userName = responseData.RootElement.GetProperty("name").GetString();
-        var userEmail = responseData.RootElement.GetProperty("email").GetString();
+        var name = responseData.RootElement.GetProperty("name").GetString();
+        var email = responseData.RootElement.GetProperty("email").GetString();
         
-        Assert.NotNull(userName);
-        Assert.NotEmpty(userName);
-        Assert.NotNull(userEmail);
-        Assert.NotEmpty(userEmail);
+        Assert.NotNull(name);
+        Assert.NotEmpty(name);
+        Assert.Equal(_name, name);
+        
+        Assert.NotNull(email);
+        Assert.NotEmpty(email);
+        Assert.Equal(_email, email);
     }
 }
