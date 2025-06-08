@@ -29,7 +29,7 @@ public class AuthenticatedUserFilter : IAsyncAuthorizationFilter
             var userIdentifier = _accessTokenValidator.ValidateAndGetUserIdentifier(token);
 
             var exist = await _repository.ExistActiveUserWithIdentifier(userIdentifier);
-            if (exist!)
+            if (!exist)
             {
                 throw new FitPlannerException(ResourceMessagesException.USER_WITHOUT_PERMISSION_ACCESS_RESOURCE);
             }

@@ -43,7 +43,7 @@ public class ChangePasswordValidatorTest
         var validator = new ChangeUserPasswordValidator();
         
         var request = RequestChangeUserPasswordJsonBuilder.Build();
-        request.Password = string.Empty;
+        request.NewPassword = string.Empty;
         
         var result = validator.Validate(request);
         

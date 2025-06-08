@@ -1,5 +1,6 @@
 ﻿using FitPlanner.Application.Services.AutoMapper;
 using FitPlanner.Application.UseCases.Login.DoLogin;
+using FitPlanner.Application.UseCases.User.ChangePassword;
 using FitPlanner.Application.UseCases.User.Profile;
 using FitPlanner.Application.UseCases.User.Register;
 using FitPlanner.Application.UseCases.User.Update;
@@ -30,6 +31,7 @@ public static class DependencyInjectionExtension
         services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
         services.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>();
         services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
+        services.AddScoped<IChangeUserPasswordUseCase, ChangeUserPasswordUseCase>();
     }
 
 
