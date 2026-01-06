@@ -1,6 +1,6 @@
 ﻿using FitPlanner.Communication.Requests;
+using FitPlanner.Domain.Repositories;
 using FitPlanner.Domain.Repositories.User;
-using FitPlanner.Domain.Respositories;
 using FitPlanner.Domain.Security.Cryptography;
 using FitPlanner.Domain.Services.LoggedUser;
 using FitPlanner.Exceptions;

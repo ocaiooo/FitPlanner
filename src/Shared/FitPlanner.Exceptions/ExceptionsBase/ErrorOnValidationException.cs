@@ -1,11 +1,6 @@
 ﻿namespace FitPlanner.Exceptions.ExceptionsBase;
 
-public class ErrorOnValidationException : FitPlannerException
+public class ErrorOnValidationException(IList<string> errorMessages) : FitPlannerException(string.Empty)
 {
-    public IList<string> ErrorMessages { get; set; }
-
-    public ErrorOnValidationException(IList<string> errorMessages) : base(string.Empty)
-    {
-        ErrorMessages = errorMessages;
-    }
+    public IList<string> ErrorMessages { get; set; } = errorMessages;
 }

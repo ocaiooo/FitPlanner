@@ -5,19 +5,15 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace FitPlanner.Infrastructure.Security.Tokens.Access.Validator;
 
-public class JwtTokenValidator : JwtTokenHandler, IAccessTokenValidator
+public class JwtTokenValidator(string signingKey) : JwtTokenHandler, IAccessTokenValidator
 {
-    private readonly string _signingKey;
-
-    public JwtTokenValidator(string signingKey) => _signingKey = signingKey;
-
     public Guid ValidateAndGetUserIdentifier(string token)
     {
         var validationParameter = new TokenValidationParameters
         {
             ValidateAudience = false,
             ValidateIssuer = false,
-            IssuerSigningKey = SecurityKey(_signingKey),
+            IssuerSigningKey = SecurityKey(signingKey),
             ClockSkew = new TimeSpan(0)
         };
 

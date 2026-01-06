@@ -1,5 +1,5 @@
 ﻿using FitPlanner.Domain.Entities;
-using FitPlanner.Domain.Respositories.User;
+using FitPlanner.Domain.Repositories.User;
 using Moq;
 
 namespace CommonTestUtilities.Repositories;
