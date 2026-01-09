@@ -157,5 +157,23 @@ namespace FitPlanner.Exceptions {
                 return ResourceManager.GetString("USER_WITHOUT_PERMISSION_ACCESS_RESOURCE", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid refresh token..
+        /// </summary>
+        public static string REFRESH_TOKEN_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("REFRESH_TOKEN_NOT_FOUND", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to The refresh token has expired..
+        /// </summary>
+        public static string REFRESH_TOKEN_EXPIRED {
+            get {
+                return ResourceManager.GetString("REFRESH_TOKEN_EXPIRED", resourceCulture);
+            }
+        }
     }
 }

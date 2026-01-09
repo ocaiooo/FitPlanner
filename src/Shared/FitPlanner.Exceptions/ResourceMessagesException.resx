@@ -51,4 +51,10 @@
     <data name="PASSWORD_EMPTY" xml:space="preserve">
         <value>The password cannot be empty.</value>
     </data>
+    <data name="REFRESH_TOKEN_NOT_FOUND" xml:space="preserve">
+        <value>Invalid refresh token.</value>
+    </data>
+    <data name="REFRESH_TOKEN_EXPIRED" xml:space="preserve">
+        <value>The refresh token has expired.</value>
+    </data>
 </root>

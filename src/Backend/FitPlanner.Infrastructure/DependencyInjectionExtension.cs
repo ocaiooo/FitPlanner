@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using FitPlanner.Domain.Repositories;
+using FitPlanner.Domain.Repositories.RefreshToken;
 using FitPlanner.Domain.Repositories.User;
 using FitPlanner.Domain.Security.Cryptography;
 using FitPlanner.Domain.Security.Tokens;
@@ -10,6 +11,7 @@ using FitPlanner.Infrastructure.Extensions;
 using FitPlanner.Infrastructure.Security.Cryptography;
 using FitPlanner.Infrastructure.Security.Tokens.Access.Generator;
 using FitPlanner.Infrastructure.Security.Tokens.Access.Validator;
+using FitPlanner.Infrastructure.Security.Tokens.Refresh;
 using FitPlanner.Infrastructure.Services.LoggedUser;
 using FluentMigrator.Runner;
 using Microsoft.Extensions.Configuration;
@@ -48,6 +50,8 @@ public static class DependencyInjectionExtension
         services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
         services.AddScoped<IUserReadOnlyRepository, UserRepository>();
         services.AddScoped<IUserUpdateOnlyRepository, UserRepository>();
+        services.AddScoped<IRefreshTokenWriteOnlyRepository, RefreshTokenRepository>();
+        services.AddScoped<IRefreshTokenReadOnlyRepository, RefreshTokenRepository>();
     }
     
     private static void AddLoggedUser(IServiceCollection services) => services.AddScoped<ILoggedUser, LoggedUser>();
@@ -69,9 +73,10 @@ public static class DependencyInjectionExtension
     {
         var expirationTimeMinutes = configuration.GetValue<uint>("Settings:Jwt:ExpirationTimeMinutes");
         var signingKey = configuration.GetValue<string>("Settings:Jwt:SigningKey");
-        
+
         services.AddScoped<IAccessTokenGenerator>(_ => new JwtTokenGenerator(signingKey!, expirationTimeMinutes));
         services.AddScoped<IAccessTokenValidator>(_ => new JwtTokenValidator(signingKey!));
+        services.AddScoped<IRefreshTokenGenerator, RefreshTokenGenerator>();
     }
     
     private static void AddPasswordEncripter(IServiceCollection services, IConfiguration configuration)
