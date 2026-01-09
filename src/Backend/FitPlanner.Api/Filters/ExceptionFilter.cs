@@ -30,6 +30,8 @@ public class ExceptionFilter : IExceptionFilter
                 context.Result = new BadRequestObjectResult(new ResponseErrorJson(errorOnValidationException.ErrorMessages));
                 break;
             case InvalidLoginException:
+            case RefreshTokenNotFoundException:
+            case RefreshTokenExpiredException:
                 context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                 context.Result = new UnauthorizedObjectResult(new ResponseErrorJson(context.Exception.Message));
                 break;

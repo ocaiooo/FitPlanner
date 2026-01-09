@@ -1,4 +1,4 @@
-﻿using FitPlanner.Domain.Respositories;
+﻿using FitPlanner.Domain.Repositories;
 using Moq;
 
 namespace CommonTestUtilities.Repositories;

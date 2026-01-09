@@ -1,11 +1,9 @@
 ﻿using FitPlanner.Communication.Requests;
+using FitPlanner.Domain.Repositories;
 using FitPlanner.Domain.Repositories.User;
-using FitPlanner.Domain.Respositories;
-using FitPlanner.Domain.Respositories.User;
 using FitPlanner.Domain.Services.LoggedUser;
 using FitPlanner.Exceptions;
 using FitPlanner.Exceptions.ExceptionsBase;
-using FluentValidation;
 
 namespace FitPlanner.Application.UseCases.User.Update;
 

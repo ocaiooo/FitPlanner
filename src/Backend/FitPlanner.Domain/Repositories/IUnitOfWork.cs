@@ -1,4 +1,4 @@
-﻿namespace FitPlanner.Domain.Respositories;
+﻿namespace FitPlanner.Domain.Repositories;
 
 public interface IUnitOfWork
 {

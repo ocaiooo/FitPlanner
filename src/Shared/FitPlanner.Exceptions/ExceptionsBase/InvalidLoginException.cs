@@ -1,7 +1,3 @@
 ﻿namespace FitPlanner.Exceptions.ExceptionsBase;
 
-public class InvalidLoginException : FitPlannerException
-{
-    public InvalidLoginException() : base(ResourceMessagesException.EMAIL_OR_PASSWORD_INVALID)
-    { }
-};
+public class InvalidLoginException() : FitPlannerException(ResourceMessagesException.EMAIL_OR_PASSWORD_INVALID);

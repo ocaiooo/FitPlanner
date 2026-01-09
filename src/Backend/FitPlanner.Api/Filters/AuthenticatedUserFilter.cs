@@ -1,5 +1,5 @@
 ﻿using FitPlanner.Communication.Responses;
-using FitPlanner.Domain.Respositories.User;
+using FitPlanner.Domain.Repositories.User;
 using FitPlanner.Domain.Security.Tokens;
 using FitPlanner.Exceptions;
 using FitPlanner.Exceptions.ExceptionsBase;
